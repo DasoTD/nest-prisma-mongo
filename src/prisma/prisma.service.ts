@@ -12,7 +12,7 @@ export class PrismaService extends PrismaClient {
         super({
             datasources: {
                 db: {
-                    url:  process.env.DB//"mongodb+srv://david:david@cluster0.ibktv.mongodb.net/nest?retryWrites=true&w=majority"
+                    url:  process.env.DB
                 }
             }
         })
