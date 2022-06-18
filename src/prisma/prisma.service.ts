@@ -1,6 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
+import * as dotenv from 'dotenv'
+
+dotenv.config()
+
 
 @Injectable()
 export class PrismaService extends PrismaClient {
@@ -8,7 +12,7 @@ export class PrismaService extends PrismaClient {
         super({
             datasources: {
                 db: {
-                    url: "mongodb+srv://david:david@cluster0.ibktv.mongodb.net/nest?retryWrites=true&w=majority"
+                    url:  process.env.DB//"mongodb+srv://david:david@cluster0.ibktv.mongodb.net/nest?retryWrites=true&w=majority"
                 }
             }
         })
