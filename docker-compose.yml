@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+
+  mongo:
+    image: mongo
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: david
+      MONGO_INITDB_ROOT_PASSWORD: pass123
+    networks:
+      - david
+networks:
+  david:
