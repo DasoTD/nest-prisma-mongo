@@ -13,6 +13,10 @@ export class AuthDto {
     @IsString()
     lastname: string;
 
+    @IsNotEmpty()
+    @IsString()
+    password: string;
+
     @IsOptional()
     @IsString()
     nickname?: string;
