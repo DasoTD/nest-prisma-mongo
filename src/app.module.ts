@@ -13,11 +13,12 @@ import { PostController } from './post/post.controller';
 import { PostService } from './post/post.service';
 import { PostModule } from './post/post.module';
 import { FileService } from './file/file.service';
+import { RoleModule } from './role/role.module';
 
 dotenv.config()
 
 @Module({
-  imports: [ ConfigModule.forRoot({}), JwtService, PrismaService, AuthModule, PrismaModule, MongooseModule.forRoot(process.env.DB), PostModule],
+  imports: [ ConfigModule.forRoot({}), JwtService, PrismaService, AuthModule, PrismaModule, MongooseModule.forRoot(process.env.DB), PostModule, RoleModule],
   controllers: [AuthController, PostController],
   providers: [AppService, AuthService, PrismaService, JwtService, PostService, FileService],
 })
