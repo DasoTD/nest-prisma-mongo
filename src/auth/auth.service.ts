@@ -85,7 +85,7 @@ export class AuthService {
             
         }
     }
-    async signToken(userId: string, email: string ): Promise<{access_token}>{
+    async signToken(userId: string, email: string ): Promise<{}>{
         const payload ={
             sub: userId,
             email
@@ -95,8 +95,10 @@ export class AuthService {
             expiresIn: '1h',
             secret: secret
         })
+        const refresh_token = await argon.hash(token)
         return {
-            access_token: token
+            access_token: token,
+            ref: refresh_token
         }
     }
 }
