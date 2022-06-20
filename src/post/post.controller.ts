@@ -17,8 +17,8 @@ export class PostController {
     
     @Get()
     //const User = this.prisma.user
-    getUser(@GetUser() user: User ){
-        return user
+    getUser(@GetUser() user: User ){  //u can also pass @Req req:Request then
+        return user                     /// return req.user
     }
     @Post('upload')
     @UseInterceptors(FileFieldsInterceptor([
