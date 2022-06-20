@@ -12,12 +12,13 @@ import { JwtService } from '@nestjs/jwt';
 import { PostController } from './post/post.controller';
 import { PostService } from './post/post.service';
 import { PostModule } from './post/post.module';
+import { FileService } from './file/file.service';
 
 dotenv.config()
 
 @Module({
   imports: [ ConfigModule.forRoot({}), JwtService, PrismaService, AuthModule, PrismaModule, MongooseModule.forRoot(process.env.DB), PostModule],
   controllers: [AuthController, PostController],
-  providers: [AppService, AuthService, PrismaService, JwtService, PostService],
+  providers: [AppService, AuthService, PrismaService, JwtService, PostService, FileService],
 })
 export class AppModule {}

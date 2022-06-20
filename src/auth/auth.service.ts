@@ -8,6 +8,7 @@ import { User } from 'src/schema/user.schema';
 import { Model } from 'mongoose';
 import * as argon from 'argon2'
 import { JwtService } from '@nestjs/jwt';
+import logger from 'src/utils/logger';
 const prisma = new PrismaClient(); 
 
 @Injectable()
@@ -73,7 +74,9 @@ export class AuthService {
             return this.signToken(user.id, user.email) 
             //delete user.hash
         } catch (error:any) {
-            
+            logger(module).info(
+                ` ${error.message}`
+              );
         }
     }
 
