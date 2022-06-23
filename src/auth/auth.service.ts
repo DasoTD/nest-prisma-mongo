@@ -1,4 +1,4 @@
-import { ForbiddenException, Injectable } from '@nestjs/common';
+import { ForbiddenException, Injectable, Req } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { PrismaClient } from '@prisma/client';
 import { AuthDto, SigninDto } from './dto';
@@ -9,6 +9,7 @@ import { Model } from 'mongoose';
 import * as argon from 'argon2'
 import { JwtService } from '@nestjs/jwt';
 import logger from 'src/utils/logger';
+import { Request } from 'express';
 const prisma = new PrismaClient(); 
 
 @Injectable()
@@ -59,7 +60,7 @@ export class AuthService {
         
     }
 
-    async signin(dto: SigninDto) {
+    async signin(dto: SigninDto, @Req() req: Request) {
         try {
             const user = await this.prisma.user.findUnique({
                 where:{
@@ -74,8 +75,13 @@ export class AuthService {
             return this.signToken(user.id, user.email) 
             //delete user.hash
         } catch (error:any) {
+            // logger(module).info(
+            //     ` ${error.message}`
+            //   );
             logger(module).info(
-                ` ${error.message}`
+                `${500} - ${req.method} - ${req.socket.remoteAddress}- ${
+                  req.originalUrl
+                } - ${error.message}`
               );
         }
     }
